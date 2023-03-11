@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class User(AbstractUser):
+class Profile(AbstractUser):
     """Модель пользователей."""
     username = models.CharField(
         max_length=150,
