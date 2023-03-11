@@ -3,6 +3,21 @@ from django.db import models
 
 class Profile(AbstractUser):
     """Модель пользователей."""
+    RED = '#f2100c'
+    BLUE = '#0000FF'
+    ORANGE = '#FFA500'
+    GREEN = '#008000'
+    PURPLE = '#800080'
+    GOLDEN = '#ccc01f'
+
+    COLOR_CHOICES = [
+        (RED, 'Красный'),
+        (BLUE, 'Синий'),
+        (ORANGE, 'Оранжевый'),
+        (GREEN, 'Зеленый'),
+        (PURPLE, 'Фиолетовый'),
+        (GOLDEN, 'Золотой'),
+    ]
     username = models.CharField(
         max_length=150,
         unique=True,
@@ -31,12 +46,17 @@ class Profile(AbstractUser):
         default=0,
         verbose_name="Колличество монет",
     )
+    background_color = models.CharField(
+        max_length=7,
+        choices=COLOR_CHOICES,
+        verbose_name='код цвета логина'
+    )
 
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
     USERNAME_FIELD = 'email'
 
     class Meta:
-        ordering = ('id',)
+        ordering = ('scores',)
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
