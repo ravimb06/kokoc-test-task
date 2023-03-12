@@ -1,13 +1,25 @@
 from django.db import models
- 
-class QuestionModel(models.Model):
-    """Модель вопроса с вариантами ответа."""
-    question = models.TextField(null=True, verbose_name='Вопрос')
-    option_1 = models.CharField(null=True, verbose_name='Вариант ответа 1')
-    option_2 = models.CharField(null=True, verbose_name='Вариант ответа 2')
-    option_3 = models.CharField(null=True, verbose_name='Вариант ответа 3')
-    option_4 = models.CharField(null=True, verbose_name='Вариант ответа 4')
-    answer = models.CharField(null=True, verbose_name='Правильный ответ')
+
+class Poll(models.Model):
+    name = models.CharField()
+    description = models.TextField()
+    pub_date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.question
+        return self.name
+
+class Question(models.Model):
+    poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField()
+    is_correct = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.text
