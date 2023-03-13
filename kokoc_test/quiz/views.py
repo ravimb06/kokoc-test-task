@@ -19,33 +19,41 @@ def take_quiz(request, pk):
     paginator = Paginator(questions,1)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator, page_number)
+    number_of_questions = len(questions)
     correct_answers = 0
-    context = {'questions': questions, 'page_obj': page_obj,}
+    correct_user_answers = request.session.get('correct_user_answers', [])
+    context = {'questions': questions,
+               'page_obj': page_obj,
+               'correct_answers': correct_answers,
+               'number_of_questions': number_of_questions,
+               'correct_user_answers':correct_user_answers,
+    }
     
 
     if request.method == 'GET':
-        if isinstance(request.GET.get('page'), str):
-            if int(request.GET.get("page")) > len(questions):
-                return render(request, 'quiz/index.html', context)
-            request.session['previous_page'] = request.path_info + "?page=" + str(int(request.GET.get("page")) + 1)
-            return render(request, 'quiz/quiz.html', context)
-        else:
-            request.session['previous_page'] = request.path_info + "?page=" + request.GET.get("page", '2')
-            return render(request, 'quiz/quiz.html', context)
+        if int(request.GET.get('page', '1')) > number_of_questions:
+            return render(request, 'quiz/results.html', context)
+        request.session['previous_page'] = (
+            request.path_info + "?page=" + str(int(request.GET.get('page', '1')) + 1)
+        )
+        return render(request, 'quiz/quiz.html', context)
+        
     
     if request.method == 'POST':
-        correct_user_answers = []
+        user_answers = request.session.get('correct_user_answers')
         option = request.POST.get('option')
+        print(user_answers)
         if not option:
             messages.error(request, 'Сначала выберите ответ.')
             return redirect(request.session['previous_page'])
+        if not user_answers:
+            request.session['correct_user_answers'] = []
         user_answer = request.POST['option']
         correct_answer = request.POST.get('answerLabel')
-        print('correct answer ',correct_answer)
-        print('user answer: ', user_answer)
         if user_answer == correct_answer:
-            correct_user_answers.append(user_answer)
-            print(request.session['previous_page'])
+            user_answers.append(user_answer)
+            request.session['correct_user_answers'] = user_answers
+            #correct_answers += 1
             return HttpResponseRedirect(request.session['previous_page'])
         else:
             messages.warning(request, f'Неправильный ответ ! Правильный ответ: {correct_answer}')
