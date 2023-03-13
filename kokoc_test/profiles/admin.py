@@ -1,3 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
-# Register your models here.
+from . import models
+
+
+@admin.register(models.Profile)
+class ProfileAdmin(UserAdmin):
+    list_display = ("id", "username", "email", "scores",)
+    search_fields = ("username", "email", "first_name",)
+    list_filter = ("background_color", "first_name", "last_name",)

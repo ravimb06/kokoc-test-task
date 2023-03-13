@@ -49,6 +49,7 @@ class Profile(AbstractUser):
     background_color = models.CharField(
         max_length=7,
         choices=COLOR_CHOICES,
+        default=GREEN,
         verbose_name='код цвета логина'
     )
 
