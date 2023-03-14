@@ -18,6 +18,7 @@ class Profile(AbstractUser):
         (PURPLE, 'Фиолетовый'),
         (GOLDEN, 'Золотой'),
     ]
+    id = models.IntegerField(primary_key=True)
     username = models.CharField(
         max_length=150,
         unique=True,
