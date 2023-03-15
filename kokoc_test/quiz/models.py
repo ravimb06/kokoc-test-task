@@ -1,16 +1,22 @@
 from django.db import models
 from profiles.models import Profile
-# Create your models here.
+
 
 class Category(models.Model):
+    """Модель категории вопросов."""
+
+    id = models.IntegerField(primary_key=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
-    
+
 
 class Question(models.Model):
+    """Модель вопроса."""
+
+    id = models.IntegerField(primary_key=True)
     choice = models.ForeignKey(Category, on_delete=models.CASCADE)
     question = models.CharField(max_length=250)
     answer = models.CharField(max_length=100)

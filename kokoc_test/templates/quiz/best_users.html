@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if 'profiles' %}
+  <div class="4" style="background:#aebaa2; border:5px solid #cccccc; padding:50px 10px">
+
+    <table align="center" border="3" cellpadding="1" cellspacing="1" style="width:800px; height:1500">
+        <h2 align="center"> Список лучших </h2>
+        <tbody>
+            <tr>
+                <td><strong><span style="color:black"><h3> Имя пользователя </h3> </span></td>
+                <td><strong><span style="color:black"><h3> Пройдено тестов </h3> </span></td>
+              </tr>
+            {% for profile in profiles %}
+              <tr>
+                <td><strong><span style={{profile.background_color}}> {{ profile.username }} </span></td>
+                <td><strong><span style={{profile.background_color}}> {{ profile.tests_taken }} </span></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p>&nbsp;</p>
+    </div>
+
+  {% else %}
+    <p>Список пуст.</p>
+  {% endif %}
+{% endblock %}

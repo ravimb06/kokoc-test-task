@@ -1,19 +1,4 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-
-from .models import Profile
-
-
-class CreationForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = Profile
-        fields = ("first_name", "last_name", "username", "email")
-
-
-class ChangeForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
-        model = Profile
-        fields = ("background_color",)
 
 
 class ProfileColorForm(forms.Form):

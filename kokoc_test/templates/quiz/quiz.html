@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% block content %}
+<div class="4" style="background:#aebaa2; border:5px solid #cccccc; padding:50px 10px">
+  <form method="POST">
+    {% csrf_token %}
+    {% for question in page_obj %}
+      <h3>{{ question.question }}</h3>
+      <ul>
+        <li>
+            <input type="radio" id="option_one" name="option" value="{{ question.option_one }}">
+            <label for="option_one">{{ question.option_one }}</label>
+        </li>
+        <li>
+            <input type="radio" id="option_two" name="option" value="{{ question.option_two }}">
+            <label for="option_two">{{ question.option_two }}</label>
+        </li>
+        <li>
+            <input type="radio" id="option_three" name="option" value="{{ question.option_three }}">
+            <label for="option_three">{{ question.option_three }}</label>
+        </li>
+        <li>
+            <input type="radio" id="option_four" name="option" value="{{ question.option_four }}">
+            <label for="option_four">{{ question.option_four }}</label>
+        </li>
+      </ul>
+      <input type="hidden" name="answerLabel" value="{{ question.answer }}">
+    {% endfor %}
+    <button type="submit">Выбрать</button>
+  </form>
+</div>
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if 'percentage' %}
+  <div>
+    <h1>Результат теста.</h1>
+    <h2>{{ result }}.</h2>
+    <h2>{{ percentage }}.</h2>
+  </div>
+  <p>Правильных ответов {{ correct_answers }} из {{ all_answers }}.</p>
+
+  <ul>
+    <p> Вы заработали {{ score }} очков.
+  </ul>
+  <ul>
+    <p> Вам начислено {{ coins }} монет.
+  </ul>
+{% else %}
+  <h1> Что то пошло не так </h1>
+{% endif %}
+
+  <a href="{% url 'quiz:index_page' %}">Выбрать другой тест</a>
+{% endblock %}

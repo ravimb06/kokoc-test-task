@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет пользователя</title>
+</head>
+<body>
+    <h1>Добро пожаловать в личный кабинет, {{ profile.username }}!</h1>
+    
+    <h2>Информация о профиле</h2>
+    <p>Имя: {{ profile.first_name }}</p>
+    <p>Фамилия: {{ profile.last_name }}</p>
+    <p>Email: {{ profile.email }}</p>
+    
+    <h2>Баланс: {{ profile.coins }} монет.</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+    {% if messages %}
+     <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} style="color:red" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+     </ul>
+    {% endif %}
+    
+    <h3><a class="nav-link link-black" 
+        href="{% url 'profiles:password_change' %}">
+        Изменить пароль
+      </a></h3>
+      <a class="nav-link link-dark"
+      href="{% url 'profiles:logout' %}">
+        Выйти
+    </a>
+</body>
+{% endblock %}
+</html>

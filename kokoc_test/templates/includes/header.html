@@ -1,0 +1,48 @@
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-light" style="background-color: lightskyblue">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'quiz:index_page' %}">
+      <img src="{% static 'images/logo.png' %}"
+        width="40"
+        height="40"
+        class="d-inline-block align-top"
+        alt=""
+      >
+      <span style="color:blue">Слон</span> здесь</a>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"> 
+        <a class="nav-link" style="color:gold" href="{% url 'quiz:best_users' %}">Список лучших</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'quiz:index_page' %}">Выбрать тест</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item"> 
+        <a class="nav-link" href="{% url 'profiles:my_account' %}"><strong><p>{{ user.username }}</p></strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-light"
+          href="{% url 'profiles:logout' %}">
+            Выйти
+        </a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link link-light"
+          href="{% url 'profiles:login' %}">
+            Войти
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-light"
+          href="{% url 'profiles:signup' %}">
+            Регистрация
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+{% endblock %}

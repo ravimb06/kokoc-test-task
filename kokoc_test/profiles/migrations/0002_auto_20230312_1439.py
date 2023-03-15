@@ -4,19 +4,34 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('profiles', '0001_initial'),
+        ("profiles", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='profile',
-            options={'ordering': ('scores',), 'verbose_name': 'Пользователь', 'verbose_name_plural': 'Пользователи'},
+            name="profile",
+            options={
+                "ordering": ("scores",),
+                "verbose_name": "Пользователь",
+                "verbose_name_plural": "Пользователи",
+            },
         ),
         migrations.AddField(
-            model_name='profile',
-            name='background_color',
-            field=models.CharField(choices=[('#f2100c', 'Красный'), ('#0000FF', 'Синий'), ('#FFA500', 'Оранжевый'), ('#008000', 'Зеленый'), ('#800080', 'Фиолетовый'), ('#ccc01f', 'Золотой')], default='#008000', max_length=7, verbose_name='код цвета логина'),
+            model_name="profile",
+            name="background_color",
+            field=models.CharField(
+                choices=[
+                    ("#f2100c", "Красный"),
+                    ("#0000FF", "Синий"),
+                    ("#FFA500", "Оранжевый"),
+                    ("#008000", "Зеленый"),
+                    ("#800080", "Фиолетовый"),
+                    ("#ccc01f", "Золотой"),
+                ],
+                default="#008000",
+                max_length=7,
+                verbose_name="код цвета логина",
+            ),
         ),
     ]

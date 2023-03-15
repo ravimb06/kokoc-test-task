@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    {% block head %}{% endblock %}
+    <style>
+        body {
+            font-size: 24px;
+            background-image: url("{% static 'images/bg2.jpg'%}");
+            background-size: 100hv;
+            background-attachment: fixed;
+            color: black;
+        }
+
+        {% block style %}
+        {% endblock %}
+    </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'other/site.webmanifest' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#000000">
+    <title>Слон здесь</title>
+</head>
+<body>
+
+{% with request.resolver_match.view_name as url_name %}
+
+    {% if url_name ==  'quiz:index_page' %}
+        <div class="container">
+            {% include 'includes/header.html' %}
+        </div>
+    {% endif %}
+
+    {% block preview %}
+    {% endblock %}
+    <div class="container">
+
+        {% if url_name !=  'quiz:index_page' %}
+            {% include 'includes/header.html' %}
+        {% endif %}
+
+        <div class="mt-5">
+            {% block content %}{% endblock %}
+        </div>
+
+    </div>
+{% endwith %}
+</body>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block underbody %}{% endblock %}
+</html>
