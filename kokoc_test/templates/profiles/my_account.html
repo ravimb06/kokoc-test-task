@@ -7,7 +7,8 @@
     <title>Личный кабинет пользователя</title>
 </head>
 <body>
-    <h1>Добро пожаловать в личный кабинет, {{ profile.username }}!</h1>
+    <h1>Добро пожаловать в личный кабинет,</h1>
+    <h1><span style={{profile.background_color}}>{{ profile.username }}!</span></h1>
     
     <h2>Информация о профиле</h2>
     <p>Имя: {{ profile.first_name }}</p>
@@ -15,10 +16,11 @@
     <p>Email: {{ profile.email }}</p>
     
     <h2>Баланс: {{ profile.coins }} монет.</h2>
+    <h3>Изменить цвет отображения логина (цена 50 монет).</h3>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Отправить</button>
+        <button color="blue" type="submit">Изменить</button>
     </form>
     {% if messages %}
      <ul class="messages">

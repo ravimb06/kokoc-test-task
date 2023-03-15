@@ -20,7 +20,7 @@
       </li>
       {% if user.is_authenticated %}
       <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'profiles:my_account' %}"><strong><p>{{ user.username }}</p></strong></a>
+        <a class="nav-link" href="{% url 'profiles:my_account' %}"><strong><p style={{profile.background_color}}>{{ user.username }}</p></strong></a>
       </li>
       <li class="nav-item">
         <a class="nav-link link-light"
