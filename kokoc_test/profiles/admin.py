@@ -5,7 +5,7 @@ from . import models
 
 
 @admin.register(models.Profile)
-class ProfileAdmin(UserAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     list_display = ("id", "username", "email", "scores",)
     search_fields = ("username", "email", "first_name",)
     list_filter = ("background_color", "first_name", "last_name",)

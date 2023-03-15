@@ -3,12 +3,12 @@ from django.db import models
 
 class Profile(AbstractUser):
     """Модель пользователей."""
-    RED = '#f2100c'
-    BLUE = '#0000FF'
-    ORANGE = '#FFA500'
-    GREEN = '#008000'
-    PURPLE = '#800080'
-    GOLDEN = '#ccc01f'
+    RED = 'color:#f2100c'
+    BLUE = 'color:#0000FF'
+    ORANGE = 'color:#FFA500'
+    GREEN = 'color:#008000'
+    PURPLE = 'color:#800080'
+    GOLDEN = 'color:#ccc01f'
 
     COLOR_CHOICES = [
         (RED, 'Красный'),
@@ -39,16 +39,20 @@ class Profile(AbstractUser):
         unique=True,
         verbose_name='email',
     )
+    tests_taken = models.IntegerField(
+        default=0,
+        verbose_name="количество пройденых тестов",
+    )
     scores = models.IntegerField(
         default=0,
-        verbose_name="Колличество очков",
+        verbose_name="количество очков",
     )
     coins = models.IntegerField(
         default=0,
-        verbose_name="Колличество монет",
+        verbose_name="количество монет",
     )
     background_color = models.CharField(
-        max_length=7,
+        max_length=16,
         choices=COLOR_CHOICES,
         default=GREEN,
         verbose_name='код цвета логина'

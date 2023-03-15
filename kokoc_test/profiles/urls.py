@@ -8,7 +8,7 @@ from django.contrib.auth.views import (
 )
 from django.urls import path
 
-from profiles.views import SignUp
+from profiles.views import SignUp, Update, my_account
 
 app_name = 'profiles'
 
@@ -19,6 +19,8 @@ urlpatterns = [
         name='logout'
     ),
     path('signup/', SignUp.as_view(), name='signup'),
+    path('update/', Update.as_view(), name='update'),
+    path('my_account/', my_account, name='my_account'),
     path(
         'login/',
         LoginView.as_view(template_name='profiles/login.html'),
